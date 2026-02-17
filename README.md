@@ -101,7 +101,7 @@ The `PayArkConfig` object accepts:
 |---|---|---|---|
 | `apiKey` | `string` | **Required** | Your project's secret key (`sk_...`). |
 | `sandbox` | `boolean` | `false` | Enable Sandbox Mode for testing without real money. |
-| `baseUrl` | `string` | `https://api.payark.com` | Override for local dev or proxy. |
+| `baseUrl` | `string` | `payark-api.codimo-dev.workers.dev` | Override for local dev or proxy. |
 | `timeout` | `number` | `30000` | Request timeout in ms. |
 | `maxRetries` | `number` | `2` | Automatic retries on 5xx errors. |
 
