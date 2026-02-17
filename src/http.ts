@@ -10,7 +10,7 @@ import type { PayArkConfig, PayArkErrorCode } from "@payark/sdk";
 export class PayArkConfigService extends Context.Tag("PayArkConfigService")<
   PayArkConfigService,
   PayArkConfig
->() {}
+>() { }
 
 /**
  * Executes an HTTP request using Effect and returns the JSON body or a PayArkEffectError.
@@ -32,7 +32,7 @@ export const request = <T>(
     const config = yield* _(PayArkConfigService);
     const client = yield* _(HttpClient.HttpClient);
 
-    const baseUrl = (config.baseUrl ?? "https://api.payark.com").replace(
+    const baseUrl = (config.baseUrl ?? "https://payark-api.codimo-dev.workers.dev").replace(
       /\/+$/,
       "",
     );

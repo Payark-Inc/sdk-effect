@@ -48,7 +48,7 @@ const program = Effect.gen(function* (_) {
       amount: 1000,
       provider: "esewa",
       returnUrl: "https://your-site.com/success",
-    })
+    }),
   );
 
   yield* _(Console.log(`Checkout created: ${session.checkout_url}`));
@@ -73,22 +73,20 @@ import { PayArk, PayArkConfig } from "@payark/sdk-effect";
 const program = Effect.gen(function* (_) {
   // Access the service from context
   const client = yield* _(PayArk);
-  
+
   const payments = yield* _(client.payments.list({ limit: 5 }));
-  
+
   yield* _(Console.log(`Found ${payments.meta.total} payments`));
 });
 
 // Configure the layer
 const PayArkLive = PayArk.Live({
   apiKey: process.env.PAYARK_API_KEY!,
-  sandbox: true // Enable sandbox mode
+  sandbox: true, // Enable sandbox mode
 });
 
 // Provide the layer to the program
-const runnable = program.pipe(
-  Effect.provide(PayArkLive)
-);
+const runnable = program.pipe(Effect.provide(PayArkLive));
 
 Effect.runPromise(runnable);
 ```
@@ -116,7 +114,7 @@ const payId = "pay_123" as PaymentId; // In real code, this comes from API
 const projId = "proj_456" as ProjectId;
 
 // ❌ Compile Error: Argument of type 'ProjectId' is not assignable to parameter of type 'PaymentId'.
-client.payments.retrieve(projId); 
+client.payments.retrieve(projId);
 
 // ✅ Correct
 client.payments.retrieve(payId);
@@ -143,7 +141,7 @@ import { PayArkEffectError } from "@payark/sdk-effect";
 
 program.pipe(
   Effect.catchTag("PayArkEffectError", (err) => {
-    switch(err.code) {
+    switch (err.code) {
       case "authentication_error":
         return Console.error("Check your API Key!");
       case "rate_limit_error":
@@ -151,7 +149,7 @@ program.pipe(
       default:
         return Console.error(`Something went wrong: ${err.message}`);
     }
-  })
+  }),
 );
 ```
 
@@ -168,15 +166,14 @@ const MockPayArk = Layer.succeed(
   PayArk,
   {
     checkout: {
-      create: () => Effect.succeed({ id: "cs_mock", checkout_url: "http://mock" })
-    }
-  } as any // Cast to partial implementation for simplicity
+      create: () =>
+        Effect.succeed({ id: "cs_mock", checkout_url: "http://mock" }),
+    },
+  } as any, // Cast to partial implementation for simplicity
 );
 
 // Run test with mock
-program.pipe(
-  Effect.provide(MockPayArk)
-)
+program.pipe(Effect.provide(MockPayArk));
 ```
 
 ## License
