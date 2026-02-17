@@ -1,6 +1,6 @@
 # @payark/sdk-effect
 
-A high-performance, functional TypeScript SDK for [PayArk](https://payark.com), built natively on the [Effect](https://effect.website/) ecosystem.
+A high-performance, functional TypeScript SDK for [PayArk](https://payark-public-demo.vercel.app/), built natively on the [Effect](https://effect.website/) ecosystem.
 
 > **Native Effect** · **Type-safe** · **Runtime Validation** · **Zero Promise overhead** · **Branded Types**
 
